@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+        }
+        #recommendation {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Weather Recommendation</h2>
+        <form id="weatherForm">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" id="temperature" required><br><br>
+
+            <label for="weatherCondition">Weather Condition:</label>
+            <select id="weatherCondition" required>
+                <option value="sunny">Sunny</option>
+                <option value="rainy">Rainy</option>
+                <option value="cloudy">Cloudy</option>
+                <option value="snowy">Snowy</option>
+            </select><br><br>
+
+            <button type="submit">1 Get Recommendation</button>
+        </form>
+
+        <!-- This is where the recommendation will be displayed -->
+        <div id="recommendation"></div>
+    </div>
+
+    <script>
+        // 1. Select the form and the recommendation div
+        const weatherForm = document.getElementById("weatherForm");  // TODO: Use document.getElementById to select the form
+        const recommendationDiv = document.getElementById("recommendation");  // TODO: Use document.getElementById to select the div for displaying recommendation
+
+        // 2. Add an event listener for the form's submit event
+        weatherForm.addEventListener("submit", function(event) {
+            event.preventDefault();  // This prevents the page from reloading when the form is submitted
+
+            // 3. Get the temperature input value and weather condition value
+            // TODO: Use document.getElementById to get the value of temperature input and weather condition dropdown
+            
+            const temperature = Number(document.getElementById("temperature").value);  // TODO: Replace with code to get the temperature value and convert it to a number
+            console.log(`temperature is ${temperature}`);
+            const weatherCondition = "";  // TODO: Replace with code to get the weather condition value
+
+            // 4. Initialize a variable to store the recommendation
+            let recommendation = "";
+
+            // 5. Write conditionals to check the temperature and weather condition
+            // TODO: Write conditionals here to set different recommendation based on weather and temperature
+
+            // 6. Display the recommendation in the div and show it
+            recommendationDiv.textContent = recommendation;  // TODO: Set the recommendation text in the div
+            recommendationDiv.style.display = "block";  // TODO: Display the recommendation div by changing its display style
+        });
+    </script>
+
+</body>
+</html>
