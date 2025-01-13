@@ -8,9 +8,13 @@
 <body>
     The grade calculation is in the console
     <script>
-        let nGrade = 92;
+        let nGrade = 12;
         
         // if statements, could be switch case
+        let sLetterGrade = "invalid";
+        if(nGrade > 100){
+            // invalid too
+        }
         if(nGrade >= 90) {
             sLetterGrade = 'A+';
         }
@@ -26,7 +30,7 @@
         else if(nGrade >= 50){
             sLetterGrade = 'D';
         }
-        else{
+        else if(typeof nGrade == "number" && nGrade > 0){
             sLetterGrade = 'F';
         }
         console.log(`${nGrade} is a ${sLetterGrade} letter grade`);
