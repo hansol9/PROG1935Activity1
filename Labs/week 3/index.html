@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Iterating over lists</h1>
+        <div id="shopping_List"></div>
+        <script>
+            const shoppingList = document.querySelector("#shopping_List");
+            const favoriteFoods = ["viva puffs", "corn chips", "jalapenos", "pierogis"];
+            for (let n = 0; n < 10; n += 1){
+                for (const food of favoriteFoods) {
+                    shoppingList.append(`I love ${food} ... please buy some!<br />`);
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -53,8 +53,29 @@
 
     <script>
         // 1. Select the form and the recommendation div
-        const weatherForm = document.getElementById("weatherForm");  // TODO: Use document.getElementById to select the form
-        const recommendationDiv = document.getElementById("recommendation");  // TODO: Use document.getElementById to select the div for displaying recommendation
+        //const weatherForm = document.getElementById("weatherForm");  // TODO: Use document.getElementById to select the form
+        const weatherForm = document.querySelector("#weatherForm");
+        //const recommendationDiv = document.getElementById("recommendation");  // TODO: Use document.getElementById to select the div for displaying recommendation
+        const recommendationDiv = document.querySelector("#recommendation");
+        
+        function getRecommendation(temperature, weatherCondition) {
+            let clothingItem = "and glasses if you need them";
+            if(weatherCondition == "sunny") {
+                if(temperature > 24) {
+                    clothingItem = "shorts" + clothingItem;
+                } else {
+                    clothingItem = "long pants or tights" + clothingItem;
+                }
+            } 
+            else if(weatherCondition =="rainy") {
+                if(temperature < -2) {
+                    clothingItem = "who knows what???? it is unusual to see rain this cold" + clothingItem; 
+                } else {
+                    clothingItem = "GoreTex" + clothingItem;
+                }
+            }
+            return `the temperature is ${temperature}, the condition is ${weatherCondition}. Wear ${clothingItem}`;
+        }
 
         // 2. Add an event listener for the form's submit event
         weatherForm.addEventListener("submit", function(event) {
@@ -63,12 +84,15 @@
             // 3. Get the temperature input value and weather condition value
             // TODO: Use document.getElementById to get the value of temperature input and weather condition dropdown
             
-            const temperature = Number(document.getElementById("temperature").value);  // TODO: Replace with code to get the temperature value and convert it to a number
+            //const temperature = Number(document.getElementById("temperature").value);  // TODO: Replace with code to get the temperature value and convert it to a number
+            const temperature = Number(document.querySelector("#temperature").value);
             console.log(`temperature is ${temperature}`);
-            const weatherCondition = "";  // TODO: Replace with code to get the weather condition value
+            //const weatherCondition = document.getElementById("weatherCondition").value;  // TODO: Replace with code to get the weather condition value
+            const weatherCondition = document.querySelector("#weatherCondition").value;
+            console.log(`condition is ${weatherCondition}`);
 
             // 4. Initialize a variable to store the recommendation
-            let recommendation = "";
+            let recommendation = getRecommendation(temperature, weatherCondition);
 
             // 5. Write conditionals to check the temperature and weather condition
             // TODO: Write conditionals here to set different recommendation based on weather and temperature
