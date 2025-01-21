@@ -53,6 +53,7 @@
 
     <script>
         // 1. Select the form and the recommendation div
+<<<<<<< HEAD
         //const weatherForm = document.getElementById("weatherForm");  // TODO: Use document.getElementById to select the form
         const weatherForm = document.querySelector("#weatherForm");
         //const recommendationDiv = document.getElementById("recommendation");  // TODO: Use document.getElementById to select the div for displaying recommendation
@@ -76,6 +77,10 @@
             }
             return `the temperature is ${temperature}, the condition is ${weatherCondition}. Wear ${clothingItem}`;
         }
+=======
+        const weatherForm = document.getElementById("weatherForm");  // TODO: Use document.getElementById to select the form
+        const recommendationDiv = document.getElementById("recommendation");  // TODO: Use document.getElementById to select the div for displaying recommendation
+>>>>>>> 18565a01f3a0eac79708f76f609ed8463674807b
 
         // 2. Add an event listener for the form's submit event
         weatherForm.addEventListener("submit", function(event) {
@@ -84,6 +89,7 @@
             // 3. Get the temperature input value and weather condition value
             // TODO: Use document.getElementById to get the value of temperature input and weather condition dropdown
             
+<<<<<<< HEAD
             //const temperature = Number(document.getElementById("temperature").value);  // TODO: Replace with code to get the temperature value and convert it to a number
             const temperature = Number(document.querySelector("#temperature").value);
             console.log(`temperature is ${temperature}`);
@@ -93,6 +99,14 @@
 
             // 4. Initialize a variable to store the recommendation
             let recommendation = getRecommendation(temperature, weatherCondition);
+=======
+            const temperature = Number(document.getElementById("temperature").value);  // TODO: Replace with code to get the temperature value and convert it to a number
+            console.log(`temperature is ${temperature}`);
+            const weatherCondition = "";  // TODO: Replace with code to get the weather condition value
+
+            // 4. Initialize a variable to store the recommendation
+            let recommendation = "";
+>>>>>>> 18565a01f3a0eac79708f76f609ed8463674807b
 
             // 5. Write conditionals to check the temperature and weather condition
             // TODO: Write conditionals here to set different recommendation based on weather and temperature
