@@ -13,7 +13,8 @@
             const favoriteFoods = ["viva puffs", "corn chips", "jalapenos", "pierogis"];
             for (let n = 0; n < 10; n += 1){
                 for (const food of favoriteFoods) {
-                    shoppingList.append(`I love ${food} ... please buy some!<br />`);
+                    //shoppingList.append(`I love ${food} ... please buy some!<br />`);
+                    shoppingList.insertAdjacentHTML('beforeend', `I love ${food} ... please buy some!<br />`);
                 }
             }
         </script>
