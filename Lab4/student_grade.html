@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Tracker</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .visibleArea {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: none; /* Initially hidden */
+        }
+
+        .visible {
+            display: block; /* Visible when class is added */
+        }
+
+        #updateContainer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0e7ff;
+            border: 1px solid #4f46e5;
+            display: none; /* Initially hidden */
+        }
+
+        input {
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Grade Tracker</h1>
+    <form id="entry">
+        <label>Enter Grade: <input id="grade" /></label><br /><br />
+        <button type="button" onclick="manipulate_grade('add')">Add Grade</button>
+        <button type="button" onclick="manipulate_grade('remove')">Remove Grade</button>
+        <button type="button" onclick="manipulate_grade('update')">Update Grade</button>
+        <button type="button" onclick="manipulate_grade('summarize')">Show Summary</button>
+    </form>
+
+    <h2>Grades</h2>
+    <div id="grades"></div>
+    <div id="gradesMessageBox" class="visibleArea"></div>
+    
+    <!-- Dynamic Update UI -->
+    <div id="updateContainer">
+        <label>Enter new grade: <input id="newGradeInput" type="number" /></label>
+        <button type="button" onclick="confirmUpdate()">Confirm</button>
+        <button type="button" onclick="cancelUpdate()">Cancel</button>
+    </div>
+    
+    <h2>Summary</h2>
+    <div id="summary"></div>
+    <div id="summaryMessageBox" class="visibleArea"></div>
+    
+    <h2>Errors</h2>
+    <div id="errorsMessageBox" class="visibleArea"></div>
+    
+    <script>
+        // 배열로 Grade 데이터를 관리
+        const grades = [];
+        
+        // message box area
+        const gradesDiv = document.querySelector("#grades");
+        const gradesMessageBox = document.querySelector("#gradesMessageBox");
+        const summaryMessageBox = document.querySelector("#summaryMessageBox");
+        const errorsMessageBox = document.querySelector("#errorsMessageBox");
+        
+        // updateDiv.
+        const newGradeInput = document.querySelector("#newGradeInput");
+        const updateContainer = document.querySelector("#updateContainer");
+
+        function manipulate_grade(button) {
+            const gradeInput = document.querySelector("#grade");
+
+            // Hide all message boxes initially
+            hideAllMessageBoxes();
+
+            // getting input value from user.
+            const gradeValue = parseInt(gradeInput.value);
+            errorsMessageBox.textContent = ""; // Clear errors
+
+            if (button === 'add') {
+                if (isNaN(gradeValue) || gradeValue < 0 || gradeValue > 100) {
+                    showMessage(errorsMessageBox, "Error: Invalid grade. <br>Please enter a valid grade (0-100).");
+                } else {
+                    grades.push(gradeValue);
+                    gradesDiv.textContent = grades.join(", ");
+                    showMessage(gradesMessageBox, `Grade ${gradeValue} added successfully.`);
+                }
+            } else if (button === 'remove') {
+                const index = grades.indexOf(gradeValue);
+                if (index === -1) {
+                    showMessage(errorsMessageBox, "Error: Grade not found in the list. Unable to remove.");
+                } else {
+                    grades.splice(index, 1);
+                    gradesDiv.textContent = grades.join(", ");
+                    showMessage(gradesMessageBox, `Grade ${gradeValue} removed successfully.`);
+                }
+            } else if (button === 'update') {
+                const index = grades.indexOf(gradeValue);
+                if (index === -1) {
+                    showMessage(errorsMessageBox, "Error: Grade not found. Cannot update.");
+                } else {
+                    gradeToUpdate = gradeValue; // Set the grade to be updated
+                    updateContainer.style.display = "block"; // Show update UI
+                }
+            } else if (button === 'summarize') {
+                if (grades.length === 0) {
+                    showMessage(summaryMessageBox, "Summary: No grades available.");
+                } else {
+                    const total = grades.reduce((sum, grade) => sum + grade, 0);
+                    const avg = (total / grades.length).toFixed(2);
+                    const min = Math.min(...grades);
+                    const max = Math.max(...grades);
+                    showMessage(summaryMessageBox, `Summary: Total = ${total}, Average = ${avg}, Min = ${min}, Max = ${max}`);
+                }
+            }
+        }
+
+        function confirmUpdate() {
+            const newGradeValue = parseInt(newGradeInput.value);
+            
+            if (isNaN(newGradeValue) || newGradeValue < 0 || newGradeValue > 100) {
+                showMessage(errorsMessageBox, "Error: Please enter a valid grade (0-100) to update.");
+            } else {
+                const index = grades.indexOf(gradeToUpdate);
+                if (index !== -1) {
+                    grades[index] = newGradeValue; // Update the grade
+                    gradesDiv.textContent = grades.join(", ");
+                    gradeToUpdate = null; // Clear the update tracking
+                }
+                updateContainer.style.display = "none"; // Hide update UI
+                newGradeInput.value = ""; // Clear input field
+            }
+        }
+
+        function cancelUpdate() {
+            updateContainer.style.display = "none"; // Hide update UI
+            newGradeInput.value = ""; // Clear input field
+            gradeToUpdate = null; // Clear the update tracking
+        }
+
+        // Function to hide all message boxes
+        function hideAllMessageBoxes() {
+            document.querySelector("#gradesMessageBox").classList.remove("visible");
+            document.querySelector("#summaryMessageBox").classList.remove("visible");
+            document.querySelector("#errorsMessageBox").classList.remove("visible");
+        }
+
+        // Function to show a specific message box with content
+        function showMessage(element, message) {
+            element.innerHTML = message;
+            element.classList.add("visible");
+        }
+    </script>
+</body>
+</html>
